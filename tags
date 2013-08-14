@@ -1,0 +1,3 @@
+ctags -R .
+find . -name "*.[chS]" > cscope.files
+cscope -b
