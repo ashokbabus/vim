@@ -1,0 +1,22 @@
+During the Project NJR CartEpp
+--------------------------------
+1. Bringing up linux
+	Struggled to get the linux on board for 2 days,
+	Problem : Nothing seen on the console, after the Uncompressing linux message...
+	Strategies/Investigation: 
+		1. Keep removing the device init's one by one from the board_init file :arch/arm/mach-omap2/board-ti8148evm.c.
+			--> didnt work
+		2. Strip the .config file to the minimum by removing all the drivers and network support
+			--> didnt work
+		3. debugging in the fire, connect the lauterbach jtag, put vmlinux symbols and look for the stack strace :
+			Result :	Found the problem was due to rootfs, it was stuck in the mount_rootfs
+		4. built few busyboxes , one from yocto and still could not boot.
+		5. Tried altering the bootargs with serveral initrd options.:
+		
+		Lesson Learned : no need of ramdisk file(built using mkimage) if you pass the ext2.gz directly and use the initrd=<file.gz> on the bootargs
+		6. One problem resolved :
+			Solution : It was just the console device bootargs issue.
+				   I was using the oldstyle ttyS0, and came to know about the new style ttyO0 after a quick chat.
+				final bootargs is this simple one : setenv bootargs console=ttyO0,115200n8  root=/dev/ram0 mem=256M 
+		7. 
+		
