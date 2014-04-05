@@ -18,5 +18,6 @@ During the Project NJR CartEpp
 			Solution : It was just the console device bootargs issue.
 				   I was using the oldstyle ttyS0, and came to know about the new style ttyO0 after a quick chat.
 				final bootargs is this simple one : setenv bootargs console=ttyO0,115200n8  root=/dev/ram0 mem=256M 
-		7. 
-		
+		 
+	Problem : kernel panic from the busybox rootfs, cannot execute the /bin/sh init failed.
+	Strategies/Investigation		
